@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexplay - Plataforma de Jogos (Desktop)</title>
+  <!-- Ícones via FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Folha de Estilo Externa -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+  <div class="desktop-layout">
+
+
+      <!-- Barra Lateral de Navegação -->
+      <aside class="sidebar">
+          <div class="brand">
+              <i class="fa-solid fa-gamepad brand-icon"></i>
+              <span class="brand-name">nexplay</span>
+          </div>
+
+
+          <nav class="sidebar-nav">
+              <a href="#" class="nav-link active" id="nav-catalog">
+                  <i class="fa-solid fa-house"></i>
+                  <span>Catálogo</span>
+              </a>
+              <a href="#" class="nav-link" id="nav-browse">
+                  <i class="fa-solid fa-compass"></i>
+                  <span>Navegar</span>
+              </a>
+              <a href="#" class="nav-link" id="nav-favorites">
+                  <i class="fa-regular fa-heart"></i>
+                  <span>Favoritos</span>
+              </a>
+              <a href="#" class="nav-link" id="nav-library">
+                  <i class="fa-solid fa-layer-group"></i>
+                  <span>Biblioteca</span>
+              </a>
+          </nav>
+
+
+          <div class="sidebar-footer">
+              <button class="user-profile-btn" id="btn-profile">
+                  <div class="user-avatar">--</div>
+                  <div class="user-info">
+                      <span class="user-name">Visitante</span>
+                      <span class="user-status">Desconectado</span>
+                  </div>
+              </button>
+          </div>
+      </aside>
+
+
+      <!-- Área Central de Conteúdo -->
+      <div class="main-wrapper">
+
+
+          <!-- Topbar Superior -->
+          <header class="topbar">
+              <div class="search-bar">
+                  <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                  <input type="text" id="main-search" placeholder="Buscar jogos, gêneros, desenvolvedores...">
+              </div>
+
+
+              <div class="topbar-actions">
+                  <button class="btn btn-outline" id="btn-topbar-login">Entrar</button>
+                  <button class="btn btn-primary" id="btn-topbar-register">Criar conta</button>
+              </div>
+          </header>
+
+
+          <!-- Painel de Conteúdo Dinâmico -->
+          <main class="content-area">
+
+
+              <!-- 1. TELA CATÁLOGO / HOME -->
+              <section id="screen-home" class="screen active">
+                  <div class="categories-scroll">
+                      <button class="pill active">Todos</button>
+                      <button class="pill">RPG</button>
+                      <button class="pill">Ação</button>
+                      <button class="pill">Indie</button>
+                      <button class="pill">Estratégia</button>
+                      <button class="pill">Aventura</button>
+                      <button class="pill">Mundo Aberto</button>
+                      <button class="pill">Corrida</button>
+                      <button class="pill">Terror</button>
+                  </div>
+
+
+                  <h2 class="section-title" id="catalog-title">Jogos em Destaque</h2>
+
+
+                  <!-- Container para renderização via API -->
+                  <div class="games-grid" id="games-container"></div>
+              </section>
+
+
+              <!-- TELA NAVEGAR -->
+              <section id="screen-browse" class="screen">
+                  <h2 class="section-title">Navegar por Categoria</h2>
+                  <div class="games-grid" id="browse-container"></div>
+              </section>
+
+
+              <!-- TELA FAVORITOS -->
+              <section id="screen-favorites" class="screen">
+                  <h2 class="section-title">Meus Favoritos</h2>
+                  <div class="games-grid" id="favorites-container"></div>
+              </section>
+
+
+              <!-- TELA BIBLIOTECA -->
+              <section id="screen-library" class="screen">
+                  <h2 class="section-title">Sua Biblioteca</h2>
+                  <div class="games-grid" id="library-container"></div>
+              </section>
+
+
+              <!-- 2. TELA DETALHES DO JOGO -->
+              <section id="screen-detail" class="screen">
+                  <button class="btn-back" id="btn-back-detail">
+                      <i class="fa-solid fa-arrow-left"></i>
+                      <span>Voltar ao catálogo</span>
+                  </button>
+
+
+                  <div class="detail-banner-desktop">
+                      <div class="banner-gradient"></div>
+                      <div class="banner-content">
+                          <h1 class="detail-title" id="detail-title">Nome do Jogo</h1>
+                          <p class="detail-developer" id="detail-developer">Desenvolvedor · Gêneros</p>
+                          <div class="tags-row" id="detail-tags"></div>
+                      </div>
+                  </div>
+
+
+                  <div class="detail-layout-grid">
+                      <div class="detail-main-col">
+                          <section class="info-section">
+                              <h2 class="section-label">SOBRE O JOGO</h2>
+                              <p class="description-text" id="detail-desc"></p>
+                          </section>
+
+
+                          <section class="info-section">
+                              <h2 class="section-label">AVALIAÇÕES DA COMUNIDADE</h2>
+                              <div class="review-card">
+                                  <div class="review-avatar">RM</div>
+                                  <div class="review-content">
+                                      <strong class="review-author">Rodrigo M.</strong>
+                                      <p class="review-text">Combate excelente e trilha sonora impecável. Vale cada minuto investido!</p>
+                                  </div>
+                              </div>
+                          </section>
+                      </div>
+
+
+                      <aside class="detail-side-col">
+                          <div class="buy-card">
+                              <div class="price-row">
+                                  <span class="price-value" id="detail-price">R$ 0,00</span>
+                                  <div class="detail-rating-badge">
+                                      <i class="fa-regular fa-star"></i>
+                                      <span id="detail-rating">0.0</span>
+                                  </div>
+                              </div>
+
+
+                              <button class="btn btn-primary btn-full" id="btn-add-library">
+                                  <i class="fa-solid fa-download"></i>
+                                  <span id="txt-add-library">Adicionar à biblioteca</span>
+                              </button>
+                              <button class="btn btn-secondary btn-full" id="btn-add-favorite">
+                                  <i class="fa-regular fa-heart" id="icon-add-favorite"></i>
+                                  <span id="txt-add-favorite">Adicionar aos Favoritos</span>
+                              </button>
+
+
+                              <div class="specs-grid">
+                                  <div class="spec-card">
+                                      <span class="spec-label">Lançamento</span>
+                                      <strong class="spec-value" id="spec-release">--</strong>
+                                  </div>
+                                  <div class="spec-card">
+                                      <span class="spec-label">Tamanho</span>
+                                      <strong class="spec-value" id="spec-size">--</strong>
+                                  </div>
+                                  <div class="spec-card">
+                                      <span class="spec-label">Plataforma</span>
+                                      <strong class="spec-value" id="spec-platform">--</strong>
+                                  </div>
+                                  <div class="spec-card">
+                                      <span class="spec-label">Editora</span>
+                                      <strong class="spec-value" id="spec-publisher">--</strong>
+                                  </div>
+                              </div>
+                          </div>
+                      </aside>
+                  </div>
+              </section>
+
+
+              <!-- 3. TELA DE LOGIN -->
+              <section id="screen-login" class="screen">
+                  <div class="auth-wrapper-desktop">
+                      <div class="auth-card">
+                          <h1 class="screen-title">Entrar</h1>
+                          <p class="screen-subtitle">Acesse sua conta para continuar</p>
+
+
+                          <form class="form-group" id="form-login">
+                              <div class="field">
+                                  <label for="login-email">E-mail</label>
+                                  <input type="email" id="login-email" placeholder="voce@email.com" required>
+                              </div>
+
+
+                              <div class="field">
+                                  <label for="login-password">Senha</label>
+                                  <input type="password" id="login-password" placeholder="••••••••" required>
+                              </div>
+
+
+                              <button type="submit" class="btn btn-primary btn-full">Entrar</button>
+                          </form>
+
+
+                          <div class="auth-footer">
+                              <span>Não tem conta?</span>
+                              <a href="#" id="link-go-register" class="link-primary">Cadastre-se</a>
+                          </div>
+                      </div>
+                  </div>
+              </section>
+
+
+              <!-- 4. TELA DE CADASTRO -->
+              <section id="screen-register" class="screen">
+                  <div class="auth-wrapper-desktop">
+                      <div class="auth-card">
+                          <h1 class="screen-title">Criar conta</h1>
+                          <p class="screen-subtitle">Comece a montar sua biblioteca de jogos</p>
+
+
+                          <form class="form-group" id="form-register">
+                              <div class="field">
+                                  <label for="reg-user">Nome de usuário</label>
+                                  <input type="text" id="reg-user" placeholder="seu_nick" required>
+                              </div>
+
+
+                              <div class="field">
+                                  <label for="reg-email">E-mail</label>
+                                  <input type="email" id="reg-email" placeholder="voce@email.com" required>
+                              </div>
+
+
+                              <div class="field-row">
+                                  <div class="field">
+                                      <label for="reg-pass">Senha</label>
+                                      <input type="password" id="reg-pass" placeholder="mínimo 8 caracteres" required minlength="8">
+                                  </div>
+
+
+                                  <div class="field">
+                                      <label for="reg-pass-confirm">Confirmar senha</label>
+                                      <input type="password" id="reg-pass-confirm" placeholder="repita a senha" required minlength="8">
+                                  </div>
+                              </div>
+
+
+                              <div class="checkbox-field">
+                                  <input type="checkbox" id="terms" required>
+                                  <label for="terms">Aceito os termos de uso e a política de privacidade</label>
+                              </div>
+
+
+                              <button type="submit" class="btn btn-primary btn-full">Criar conta</button>
+                          </form>
+
+
+                          <div class="auth-footer">
+                              <span>Já tem uma conta?</span>
+                              <a href="#" id="link-go-login" class="link-primary">Faça login</a>
+                          </div>
+                      </div>
+                  </div>
+              </section>
+
+
+          </main>
+      </div>
+  </div>
+
+
+  <script src="script.js"></script>
+</body>
+</html>
